@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResidentialProperty.Service
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResidentialProperty.Api", "ResidentialProperty.Api\ResidentialProperty.Api.csproj", "{02A8658C-5DF4-D5DF-1B14-34C6D1A25FFE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResidentialProperty.ApiGateway", "ResidentialProperty.ApiGateway\ResidentialProperty.ApiGateway.csproj", "{75DBDD1A-EB23-50C6-74EC-22E1C27E1809}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{02A8658C-5DF4-D5DF-1B14-34C6D1A25FFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02A8658C-5DF4-D5DF-1B14-34C6D1A25FFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02A8658C-5DF4-D5DF-1B14-34C6D1A25FFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75DBDD1A-EB23-50C6-74EC-22E1C27E1809}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75DBDD1A-EB23-50C6-74EC-22E1C27E1809}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75DBDD1A-EB23-50C6-74EC-22E1C27E1809}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75DBDD1A-EB23-50C6-74EC-22E1C27E1809}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

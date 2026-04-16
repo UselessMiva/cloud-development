@@ -1,0 +1,30 @@
+{
+    "Routes": [
+      {
+        "DownstreamPathTemplate": "/api/ResidentialProperty",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 7283
+          },
+          {
+            "Host": "localhost",
+            "Port": 7284
+          },
+          {
+            "Host": "localhost",
+            "Port": 7285
+          }
+        ],
+        "UpstreamPathTemplate": "/api/ResidentialProperty",
+        "UpstreamHttpMethod": [ "Get" ],
+        "LoadBalancerOptions": {
+          "Type": "WeightedRoundRobinBalancer"
+        }
+      }
+    ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7297"
+  }
+ }

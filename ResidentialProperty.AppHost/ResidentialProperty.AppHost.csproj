@@ -18,6 +18,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Client.Wasm\Client.Wasm.csproj" />
+		<ProjectReference Include="..\ResidentialProperty.ApiGateway\ResidentialProperty.ApiGateway.csproj" />
 		<ProjectReference Include="..\ResidentialProperty.Api\ResidentialProperty.Api.csproj" />
 	</ItemGroup>
 
