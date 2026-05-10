@@ -51,22 +51,9 @@ builder.Services
     .AddCustomLoadBalancer((serviceProvider, route, serviceDiscovery) =>
         new WeightedRoundRobinBalancer(serviceDiscovery.GetAsync, downstreamAddressWeights));
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll", policy =>
-    {
-        policy.AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader();
-    });
-});
-
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
-app.UseHealthChecks("/health");
-app.UseHealthChecks("/alive", new HealthCheckOptions { Predicate = r => r.Tags.Contains("live") });
-app.UseCors("AllowAll");
 await app.UseOcelot();
 
 app.Run();
