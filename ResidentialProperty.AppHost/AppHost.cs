@@ -4,7 +4,7 @@ var builder = DistributedApplication.CreateBuilder(args);
 var redis = builder.AddRedis("redis")
     .WithRedisCommander();
 
-var apis = new List<IResourceBuilder<ProjectResource>>();
+var gateway = builder.AddProject<Projects.ResidentialProperty_ApiGateway>("residentialproperty-apigateway");
 var ports = new[] { 7283, 7284, 7285 };
 
 for (var i = 0; i < ports.Length; i++)
@@ -20,14 +20,8 @@ for (var i = 0; i < ports.Length; i++)
             endpoint.TargetPort = ports[i];
         })
         .WaitFor(redis);
-    apis.Add(api);
-}
 
-var gateway = builder.AddProject<Projects.ResidentialProperty_ApiGateway>("residentialproperty-apigateway");
-
-foreach (var api in apis)
-{
-    gateway.WithReference(api);
+    gateway.WithReference(api).WaitFor(api);
 }
 
 // Добавляем клиентский проект

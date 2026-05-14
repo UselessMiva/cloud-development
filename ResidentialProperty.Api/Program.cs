@@ -6,18 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 builder.AddRedisDistributedCache("redis");
 
-builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(policy =>
-    {
-        policy.SetIsOriginAllowed(origin =>
-            new Uri(origin).Host == "localhost") 
-              .WithMethods("GET")
-              .WithHeaders("Content-Type")
-              .AllowCredentials();
-    });
-});
-
 // Регистрация сервисов
 builder.Services.AddSingleton<ResidentialPropertyGenerator>();
 builder.Services.AddScoped<IResidentialPropertyGeneratorService, ResidentialPropertyGeneratorService>();
@@ -56,7 +44,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors();
 app.MapControllers();
 app.MapDefaultEndpoints();
 

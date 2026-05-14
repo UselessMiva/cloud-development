@@ -51,9 +51,22 @@ builder.Services
     .AddCustomLoadBalancer((serviceProvider, route, serviceDiscovery) =>
         new WeightedRoundRobinBalancer(serviceDiscovery.GetAsync, downstreamAddressWeights));
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.SetIsOriginAllowed(origin =>
+            new Uri(origin).Host == "localhost")
+              .WithMethods("GET")
+              .WithHeaders("Content-Type")
+              .AllowCredentials();
+    });
+});
+
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
+app.UseCors();
 await app.UseOcelot();
 
 app.Run();
