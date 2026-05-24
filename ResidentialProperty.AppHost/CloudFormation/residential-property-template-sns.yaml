@@ -1,0 +1,54 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Cloud formation template for ResidentialProperty project'
+
+Parameters:
+  BucketName:
+    Type: String
+    Description: Name for the S3 bucket
+    Default: 'residentialfiles'
+  
+  TopicName:
+    Type: String
+    Description: Name for the SNS topic
+    Default: 'residentialproperty-topic'
+
+Resources:
+  ResidentialPropertyBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref BucketName
+      VersioningConfiguration:
+        Status: Suspended
+      Tags:
+        - Key: Name
+          Value: !Ref BucketName
+        - Key: Environment
+          Value: Development
+
+  ResidentialPropertyTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: !Ref TopicName
+      DisplayName: !Ref TopicName
+      Tags:
+        - Key: Name
+          Value: !Ref TopicName
+        - Key: Environment
+          Value: Development
+
+Outputs:
+  S3BucketName:
+    Description: Name of the S3 bucket
+    Value: !Ref ResidentialPropertyBucket
+  
+  S3BucketArn:
+    Description: ARN of the S3 bucket
+    Value: !GetAtt ResidentialPropertyBucket.Arn
+
+  SNSTopicName:
+    Description: Name of the SNS topic
+    Value: !GetAtt ResidentialPropertyTopic.TopicName
+
+  SNSTopicArn:
+    Description: ARN of the SNS topic
+    Value: !Ref ResidentialPropertyTopic

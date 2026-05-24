@@ -1,14 +1,24 @@
+using Amazon.SimpleNotificationService;
+using LocalStack.Client.Extensions;
 using ResidentialProperty.Api.Services.ResidentialPropertyGeneratorService;
 using ResidentialProperty.ServiceDefaults;
+using ResidentialProperty.Api.Messaging;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
+
+// Redis 
 builder.AddRedisDistributedCache("redis");
+
+// AWS SNS через LocalStack
+builder.Services.AddLocalStack(builder.Configuration);
+builder.Services.AddAwsService<IAmazonSimpleNotificationService>();
 
 // Регистрация сервисов
 builder.Services.AddSingleton<ResidentialPropertyGenerator>();
 builder.Services.AddScoped<IResidentialPropertyGeneratorService, ResidentialPropertyGeneratorService>();
+builder.Services.AddScoped<ISnsPublisher, SnsPublisher>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

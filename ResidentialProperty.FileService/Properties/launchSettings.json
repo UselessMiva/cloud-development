@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "ResidentialProperty.FileService": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:61328;http://localhost:61329"
+    }
+  }
+}

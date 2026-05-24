@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Caching.Distributed;
+using ResidentialProperty.Api.Messaging;
 using ResidentialProperty.Domain.Entities;
 using System.Text.Json;
 
@@ -10,6 +11,7 @@ namespace ResidentialProperty.Api.Services.ResidentialPropertyGeneratorService;
 public class ResidentialPropertyGeneratorService(
     IDistributedCache cache,
     ResidentialPropertyGenerator generator,
+    ISnsPublisher snsPublisher,
     IConfiguration configuration,
     ILogger<ResidentialPropertyGeneratorService> logger) : IResidentialPropertyGeneratorService
 {
@@ -43,6 +45,17 @@ public class ResidentialPropertyGeneratorService(
 
         // Попытка сохранить в кэш
         await SaveToCacheAsync(cacheKey, property, cancellationToken);
+
+        // Публикуем сообщение в SNS для обработки файловым сервисом
+        try
+        {
+            await snsPublisher.Publish(property);
+            logger.LogInformation("Property {Id} published to SNS", property.Id);
+        }
+        catch (Exception ex)
+        {
+            logger.LogWarning(ex, "Failed to publish property {Id} to SNS (error ignored)", property.Id);
+        }
 
         return property;
     }
