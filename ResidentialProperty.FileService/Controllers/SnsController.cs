@@ -39,7 +39,6 @@ public class SnsController(
             {
                 logger.LogInformation("SubscriptionConfirmation was received");
                 using var httpClient = new HttpClient();
-                // Переписываем URL, чтобы обратиться к LocalStack через известный хост/порт
                 var builder = new UriBuilder(new Uri(snsMessage.SubscribeURL))
                 {
                     Scheme = "http",

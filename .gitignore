@@ -476,6 +476,4 @@ example/CompanyEmployee.ServiceDefaults/Extensions.cs
 example/CompanyEmployee.Test/CompanyEmployee.Test.csproj
 example/CompanyEmployee.Test/Fixture.cs
 example/CompanyEmployee.Test/IntegrationTests.cs
-plan.md
-prompt.md
 README_MINIO.md

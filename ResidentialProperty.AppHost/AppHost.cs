@@ -45,7 +45,6 @@ for (var i = 0; i < ports.Length; i++)
         .WithHttpEndpoint(port)
         .WithReference(redis)
         .WithReference(awsResources)
-        .WithEnvironment("Settings__MessageBroker", "SNS")
         .WaitFor(redis)
         .WaitFor(awsResources);
 
@@ -61,17 +60,9 @@ var sink = builder.AddProject<Projects.ResidentialProperty_FileService>("fileser
     .WithHttpEndpoint(5280)
     .WithReference(awsResources)
     .WithReference(minio)
-    .WithEnvironment("Settings__MessageBroker", "SNS")
-    .WithEnvironment("Settings__S3Hosting", "Minio")
     .WithEnvironment("AWS__Resources__SNSUrl", "http://host.docker.internal:5280/api/sns")
     .WithEnvironment("AWS__Resources__MinioBucketName", "residentialfiles")
     .WaitFor(awsResources)
-    .WaitFor(minio);
-
-sink.WithEnvironment("AWS__Resources__SNSUrl", "http://host.docker.internal:5280/api/sns");
-
-sink.WithEnvironment("AWS__Resources__MinioBucketName", "residentialfiles")
-    .WithReference(minio)
     .WaitFor(minio);
 
 builder.UseLocalStack(localstack);
