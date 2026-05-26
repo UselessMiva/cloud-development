@@ -1,8 +1,7 @@
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
-using ResidentialProperty.ApiGateway.LoadBalancing;
 using ResidentialProperty.ServiceDefaults;
+using ResidentialProperty.ApiGateway.LoadBalancing;
 
 var builder = WebApplication.CreateBuilder(args);
 

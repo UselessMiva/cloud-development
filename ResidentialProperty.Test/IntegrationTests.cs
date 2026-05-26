@@ -1,10 +1,8 @@
 using Aspire.Hosting;
-using Aspire.Hosting.Testing;
 using Microsoft.Extensions.Logging;
 using ResidentialProperty.Domain.Entities;
 using System.Net.Http.Json;
 using System.Text.Json;
-using Xunit;
 
 namespace ResidentialProperty.Test;
 
